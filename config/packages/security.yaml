@@ -9,6 +9,9 @@ security:
         dev:
             pattern: ^/(_profiler(/|$)|(_wdt|assets|build)/)
             security: false
+        onlyoffice:
+            pattern: ^/purchase_file_editor
+            security: false
         main:
             stateless: true
             provider: jwt
