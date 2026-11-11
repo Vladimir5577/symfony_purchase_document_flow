@@ -1,5 +1,6 @@
 # Настоящие значения; в git только .env.example
 /.env
+/.idea
 
 
 ###> symfony/framework-bundle ###
