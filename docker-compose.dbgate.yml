@@ -1,0 +1,26 @@
+services:
+
+  dbgate_purchase:
+    container_name: dbgate_purchase
+    image: dbgate/dbgate:5.5.6-alpine
+    restart: always
+    ports:
+      # 8087 — dbgate монолита, 8088 — канбана, 8089/8090/8092 тоже заняты
+      - 8094:3000
+    environment:
+      CONNECTIONS: con1
+
+      LABEL_con1: Purchase Postgres
+      SERVER_con1: postgres_purchase
+      USER_con1: ${DB_USERNAME:-purchase}
+      PASSWORD_con1: ${DB_PASSWORD:-purchase}
+      PORT_con1: 5432
+      ENGINE_con1: postgres@dbgate-plugin-postgres
+    networks:
+      - purchase-net
+
+networks:
+  purchase-net:
+    # Сеть создаёт основной docker-compose.yml этого проекта
+    external: true
+    name: purchase-net

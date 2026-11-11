@@ -1,0 +1,21 @@
+security:
+    providers:
+        # Пользователь собирается из JWT монолита (id, username, roles), таблицы пользователей здесь нет.
+        jwt:
+            lexik_jwt:
+                class: App\Security\JwtUser
+
+    firewalls:
+        dev:
+            pattern: ^/(_profiler(/|$)|(_wdt|assets|build)/)
+            security: false
+        main:
+            stateless: true
+            provider: jwt
+            jwt: ~
+
+    access_control:
+        # Document Server скачивает файл и шлёт callback без JWT: адреса подписаны HMAC,
+        # подпись проверяет PurchaseFileEditorController.
+        - { path: ^/purchase_file_editor, roles: PUBLIC_ACCESS }
+        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }

@@ -1,0 +1,16 @@
+framework:
+    messenger:
+        transports:
+            # Тот же exchange, что у монолита: сервис уведомлений читает его и не знает, кто отправил.
+            # Сервис только публикует, поэтому auto_setup выключен: exchange и очереди заводит монолит.
+            event_bus:
+                dsn: '%env(RABBITMQ_TRANSPORT_DSN)%'
+                serializer: messenger.transport.symfony_serializer
+                options:
+                    auto_setup: false
+                    exchange:
+                        name: events
+                        type: topic
+
+        routing:
+            App\Message\NotificationMessage: event_bus

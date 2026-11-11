@@ -1,0 +1,68 @@
+services:
+
+  php_purchase:
+    build:
+      context: .
+      dockerfile: ./docker_env/php/Dockerfile
+    container_name: php_purchase
+    restart: unless-stopped
+    # need to work xdebug from CLI
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./:/var/www/html
+      - ./docker_env/php/conf.d/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./docker_env/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./docker_env/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+      # PHP-FPM pool overrides (max_children и т.д.)
+      - ./docker_env/php/fpm.d/zz-pool.conf:/usr/local/etc/php-fpm.d/zz-pool.conf
+      # Публичный ключ JWT монолита: токены выдаёт он, здесь только проверка
+      - ./../symfony_documents_flow/config/jwt/public.pem:/config/jwt/public.pem:ro
+    environment:
+      PHP_IDE_CONFIG: serverName=purchase
+      XDEBUG_CONFIG: client_host=host.docker.internal client_port=9003
+    networks:
+      - purchase-net
+      # Справочник, RabbitMQ, OnlyOffice, MinIO и nginx монолита
+      - project-net
+
+  nginx_purchase:
+    build:
+      context: .
+      dockerfile: ./docker_env/nginx/Dockerfile
+    container_name: nginx_purchase
+    restart: unless-stopped
+    ports:
+      - "${PURCHASE_NGINX_PORT:-8096}:80"
+    volumes:
+      - ./docker_env/nginx/config/default.conf:/etc/nginx/conf.d/default.conf
+      - ./:/var/www/html
+    networks:
+      - purchase-net
+      # Сюда nginx монолита будет проксировать /spa/api/purchases
+      - project-net
+
+  postgres_purchase:
+    container_name: postgres_purchase
+    image: postgres:16.4
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-purchase}
+      POSTGRES_USER: ${DB_USERNAME:-purchase}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-purchase}
+      PGDATA: /data/postgres
+    volumes:
+      - ./../postgres_data_purchase:/data/postgres
+    # Наружу не пробрасываем: смотреть базу — через dbgate (docker-compose.dbgate.yml)
+    networks:
+      - purchase-net
+
+networks:
+  purchase-net:
+    name: purchase-net
+    driver: bridge
+
+  project-net:
+    # Сеть поднимает docker-compose монолита symfony_documents_flow
+    external: true
+    name: project-net
