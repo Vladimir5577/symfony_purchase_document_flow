@@ -34,7 +34,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
-#[Route('/spa/api/purchases/{id}/files', requirements: ['id' => '\d+'])]
+#[Route('/spa/api/purchase/purchases/{id}/files', requirements: ['id' => '\d+'])]
 final class PurchaseFileController extends AbstractController
 {
     private const MAX_FILE_SIZE = 10 * 1024 * 1024;

@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
-#[Route('/spa/api/purchases/{id}/history', requirements: ['id' => '\d+'])]
+#[Route('/spa/api/purchase/purchases/{id}/history', requirements: ['id' => '\d+'])]
 final class PurchaseHistoryController extends AbstractController
 {
     private const DEFAULT_PAGE_SIZE = 10;

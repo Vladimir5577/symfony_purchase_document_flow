@@ -33,7 +33,7 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
  * Отдельных ручек под конвейер исполнения нет: оплата и поставка — те
  * же задачи маршрута, и закрываются той же кнопкой, что подпись бухгалтерии.
  */
-#[Route('/spa/api/purchases/{id}', requirements: ['id' => '\d+'])]
+#[Route('/spa/api/purchase/purchases/{id}', requirements: ['id' => '\d+'])]
 final class PurchaseTransitionController extends AbstractController
 {
     public function __construct(

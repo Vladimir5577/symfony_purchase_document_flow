@@ -23,7 +23,7 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
  * Читать может любой авторизованный: названия ролей стоят на шагах маршрута и
  * видны всем участникам, а полномочия здесь — пояснение к галочке, не секрет.
  */
-#[Route('/spa/api/purchase-roles')]
+#[Route('/spa/api/purchase/purchase-roles')]
 final class PurchaseRoleController extends AbstractController
 {
     #[Route('', name: 'spa_api_purchase_roles_list', methods: ['GET'])]

@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
-#[Route('/spa/api/purchases/{id}/comments', requirements: ['id' => '\d+'])]
+#[Route('/spa/api/purchase/purchases/{id}/comments', requirements: ['id' => '\d+'])]
 final class PurchaseCommentController extends AbstractController
 {
     private const MAX_COMMENT_LENGTH = 10000;

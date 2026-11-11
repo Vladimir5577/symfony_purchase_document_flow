@@ -75,7 +75,7 @@ final class PurchaseFileEditorController extends AbstractController
     ) {
     }
 
-    #[Route('/spa/api/purchases/{id}/files/{fileId}/editor', name: 'spa_api_purchases_file_editor_open', requirements: ['id' => '\d+', 'fileId' => '\d+'], methods: ['POST'])]
+    #[Route('/spa/api/purchase/purchases/{id}/files/{fileId}/editor', name: 'spa_api_purchases_file_editor_open', requirements: ['id' => '\d+', 'fileId' => '\d+'], methods: ['POST'])]
     public function open(int $id, int $fileId, #[CurrentUser] ?JwtUser $user): JsonResponse
     {
         $found = $this->findEditable($id, $fileId, $user);
@@ -125,7 +125,7 @@ final class PurchaseFileEditorController extends AbstractController
         ]);
     }
 
-    #[Route('/spa/api/purchases/{id}/files/{fileId}/editor', name: 'spa_api_purchases_file_editor_status', requirements: ['id' => '\d+', 'fileId' => '\d+'], methods: ['GET'])]
+    #[Route('/spa/api/purchase/purchases/{id}/files/{fileId}/editor', name: 'spa_api_purchases_file_editor_status', requirements: ['id' => '\d+', 'fileId' => '\d+'], methods: ['GET'])]
     public function status(int $id, int $fileId, Request $request, #[CurrentUser] ?JwtUser $user): JsonResponse
     {
         $found = $this->findVisible($id, $fileId, $user);
@@ -138,7 +138,7 @@ final class PurchaseFileEditorController extends AbstractController
         ]);
     }
 
-    #[Route('/spa/api/purchases/{id}/files/{fileId}/editor/save', name: 'spa_api_purchases_file_editor_save', requirements: ['id' => '\d+', 'fileId' => '\d+'], methods: ['POST'])]
+    #[Route('/spa/api/purchase/purchases/{id}/files/{fileId}/editor/save', name: 'spa_api_purchases_file_editor_save', requirements: ['id' => '\d+', 'fileId' => '\d+'], methods: ['POST'])]
     public function save(int $id, int $fileId, Request $request, #[CurrentUser] ?JwtUser $user): JsonResponse
     {
         $found = $this->findEditable($id, $fileId, $user);

@@ -432,11 +432,11 @@ final class PurchaseApiPresenter
     {
         $purchaseId = $file->getPurchaseRequest()?->getId();
         if ($purchaseId !== null) {
-            return sprintf('/spa/api/purchases/%d/files/%d/download', $purchaseId, $file->getId());
+            return sprintf('/spa/api/purchase/purchases/%d/files/%d/download', $purchaseId, $file->getId());
         }
 
         return sprintf(
-            '/spa/api/purchases/approved-contracts/%d/files/%d/download',
+            '/spa/api/purchase/purchases/approved-contracts/%d/files/%d/download',
             (int) $file->getContract()?->getId(),
             $file->getId(),
         );

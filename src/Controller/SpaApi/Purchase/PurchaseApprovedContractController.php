@@ -30,7 +30,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 /** Договоры с утверждёнными рецензиями. Список для отдела закупок. */
-#[Route('/spa/api/purchases/approved-contracts')]
+#[Route('/spa/api/purchase/purchases/approved-contracts')]
 final class PurchaseApprovedContractController extends AbstractController
 {
     public function __construct(

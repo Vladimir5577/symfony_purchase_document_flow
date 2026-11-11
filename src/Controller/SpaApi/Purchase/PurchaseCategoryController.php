@@ -27,7 +27,7 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
  * Справочник категорий закупок с номенклатурой.
  * Читают все участники процесса закупок, ведёт отдел закупок.
  */
-#[Route('/spa/api/purchase-categories')]
+#[Route('/spa/api/purchase/purchase-categories')]
 final class PurchaseCategoryController extends AbstractController
 {
     public function __construct(

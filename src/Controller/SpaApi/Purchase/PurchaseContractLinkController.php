@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 /** Ссылка заявки на уже существующий договор. Файл не копируется. */
-#[Route('/spa/api/purchases/{id}/contracts', requirements: ['id' => '\d+'])]
+#[Route('/spa/api/purchase/purchases/{id}/contracts', requirements: ['id' => '\d+'])]
 final class PurchaseContractLinkController extends AbstractController
 {
     public function __construct(

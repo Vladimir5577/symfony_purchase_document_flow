@@ -40,7 +40,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
-#[Route('/spa/api/purchases')]
+#[Route('/spa/api/purchase/purchases')]
 final class PurchaseController extends AbstractController
 {
     private const DEFAULT_PAGE_SIZE = 20;

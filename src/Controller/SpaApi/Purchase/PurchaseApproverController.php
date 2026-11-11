@@ -23,7 +23,7 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
  * Участники модуля закупок: кого директор может отметить в заявке и кто носит
  * роли модуля. Ведёт админ, порядок задаёт руками.
  */
-#[Route('/spa/api/purchase-approvers')]
+#[Route('/spa/api/purchase/purchase-approvers')]
 final class PurchaseApproverController extends AbstractController
 {
     public function __construct(

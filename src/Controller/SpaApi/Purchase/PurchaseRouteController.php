@@ -38,7 +38,7 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
  * в этапах своей заявки, скрывать тут нечего, а фронту нужны справочники ролей и
  * назначений, чтобы нарисовать экран.
  */
-#[Route('/spa/api/purchase-routes')]
+#[Route('/spa/api/purchase/purchase-routes')]
 final class PurchaseRouteController extends AbstractController
 {
     public function __construct(
